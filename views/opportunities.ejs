@@ -1,0 +1,30 @@
+<% include partials/header %>
+
+<div class="container">
+<header class="jumbotron">
+        <div class="container">
+        <h1>Welcome to The Opportunity</h1>
+        <p>View scholarship opportunities</p>
+        <p>
+                <a class="btn btn-primary btn-lg" href="/opportunities/new">Add New Opportunity</a>
+        </p>
+    
+</header>
+
+
+<div class="row text-center" style="display:flex; flex-wrap: wrap;">
+   <% opportunities.forEach(function(opportunities){ %>
+       <div class="col-md-3 col-sm-6">
+           <div class="thumbnail">
+                <img src="<%= opportunities.image %>">
+                <div class="caption">
+                        <h4><%= opportunities.name %></h4>
+                </div>
+           </div>
+       </div>
+    <% }); %>
+    </div>
+</div>
+
+
+<% include partials/footer %>
