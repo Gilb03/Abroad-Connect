@@ -1,41 +1,48 @@
-var  express = require("express");
+var  express = require('express');
 var  app = express();
-var bodyParser =require("body-parser");
+var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var passport = require('passport');
+var LocalStrategy = require('passport-local');
+var User = require('./models/user');
+var Opportunity = require('./models/opportunity');
+var Comment = require('./models/comment');
+var seedDB = require('./seeds');
+
+var commentRoutes = require('./routes/comments');
+var opportunityRoutes = require('./routes/opportunities');
+var authRoutes = require('./routes/auth');
+
+
+mongoose.connect('mongodb://localhost:27017/abroad_connect');
 
 app.use(bodyParser.urlencoded({extended: true}));
-app.set("view engine", "ejs");
-app.use(express.static(__dirname + "/public"));
+app.set('view engine', 'ejs');
+app.use(express.static(__dirname + '/public'));
+seedDB();
 
-var opportunities = [
-    {name: "Salmon Creek Scholarship", image: "https://pixabay.com/photos/home-office-workstation-office-336373/"},
-    {name: "SAAB Scholarship", image: "https://pixabay.com/photos/home-office-workstation-office-336373/"},
-    {name: "DOPE Scholarship", image: "https://pixabay.com/photos/home-office-workstation-office-336373/"}
-];
+//Passport Config
+app.use(require('express-session')({
+    secret:'This is Danielle Boyles application',
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
-app.get("/", function(req, res){
-    res.render("landing");
+app.use(function(req, res, next){
+res.locals.currentUser = req.user;
+next();
 });
 
-app.get("/opportunities", function(req, res){
- res.render("opportunities",{opportunities: opportunities});
-});
+// REQUIRING ROUTES
+app.use('/opportunities', opportunityRoutes);
+app.use('/opportunities/:id/comments',commentRoutes);
+app.use('/',authRoutes);
 
-app.post("/opportunities", function(req, res){
-   // res.send("You hit the post route")
-    //get data from form and add to array
-    var name= req.body.name;
-    var image= req.body.image;
-    var description= req.body.description;
-    var link= req.body.link;
-    var newOpportunity= {name: name, image: image, description: description, link: link  }
-    opportunities.push(newOpportunity);
-    //redirect back to opportunity page
-    res.redirect("/opportunities");
-});
-
-app.get("/opportunities/new", function(req, res){
-    res.render("new.ejs");
-});
 
 const port = process.env.PORT || 3000
 app.listen(port, process.env.IP, function() {
