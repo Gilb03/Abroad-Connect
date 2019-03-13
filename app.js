@@ -2,10 +2,12 @@ var  express = require('express');
 var  app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var flash  = require('connect-flash');
 var passport = require('passport');
 var LocalStrategy = require('passport-local');
 var User = require('./models/user');
 var Opportunity = require('./models/opportunity');
+var methodOverride = require('method-override');
 var Comment = require('./models/comment');
 var seedDB = require('./seeds');
 
@@ -18,8 +20,10 @@ mongoose.connect('mongodb://localhost:27017/abroad_connect');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set('view engine', 'ejs');
-app.use(express.static(__dirname + '/public'));
-seedDB();
+app.use(express.static(__dirname + "/public"));
+app.use(methodOverride('_method'));
+app.use(flash());
+// seedDB();
 
 //Passport Config
 app.use(require('express-session')({
@@ -35,6 +39,8 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use(function(req, res, next){
 res.locals.currentUser = req.user;
+res.locals.error = req.flash('error');
+res.locals.success = req.flash('success');
 next();
 });
 
@@ -42,7 +48,6 @@ next();
 app.use('/opportunities', opportunityRoutes);
 app.use('/opportunities/:id/comments',commentRoutes);
 app.use('/',authRoutes);
-
 
 const port = process.env.PORT || 3000
 app.listen(port, process.env.IP, function() {

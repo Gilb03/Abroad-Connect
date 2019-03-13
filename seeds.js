@@ -33,7 +33,7 @@ function seedDB(){
             }
             console.log("removed comments!");
              //add a few opportunitiess
-            data.forEach(function(seed){
+             data.forEach(function(seed){
                 Opportunity.create(seed, function(err, opportunity){
                     if(err){
                         console.log(err)
@@ -57,6 +57,7 @@ function seedDB(){
                 });
             });
         });
+        
     }); 
     //add a few comments
 }

@@ -4,6 +4,13 @@ var opportunitySchema = new mongoose.Schema({
     name: String,
     image: String,
     description: String,
+    author: {
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        },
+        username: String
+    },
     link: String,
     comments: [
         {
