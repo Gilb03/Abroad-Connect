@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 var  express = require('express');
 var  app = express();
 var bodyParser = require('body-parser');
@@ -11,6 +13,8 @@ var methodOverride = require('method-override');
 var Comment = require('./models/comment');
 var seedDB = require('./seeds');
 
+
+
 var commentRoutes = require('./routes/comments');
 var opportunityRoutes = require('./routes/opportunities');
 var authRoutes = require('./routes/auth');
@@ -23,7 +27,7 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride('_method'));
 app.use(flash());
-// seedDB();
+//seedDB();
 
 //Passport Config
 app.use(require('express-session')({
