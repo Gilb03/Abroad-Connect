@@ -1,15 +1,16 @@
 <% include ../partials/header %>
 
-
 <div class="container">
 <header class="jumbotron">
         <div class="container">
-        <h1>Welcome to The Opportunity</h1>
-        <p>View scholarship opportunities</p>
+        <h1>Welcome to The Opportunity Page</h1>
+        <p>View scholarship and travel abroad opportunities</p>
+
+        <% if(currentUser && currentUser.isAdmin){ %>
         <p>
                 <a class="btn btn-primary btn-lg" href="/opportunities/new">Add New Opportunity</a>
         </p>
-    
+          <% } %>
 </header>
 
 
@@ -20,7 +21,7 @@
                 <img src="<%= opportunity.image %>">
                 <div class="caption">
                         <h4><%= opportunity.name %></h4>
-                        
+
                 </div>
                 <p>
                     <a href="/opportunities/<%= opportunity._id %>" class="btn btn-primary">More Info</a>

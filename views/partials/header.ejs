@@ -27,13 +27,15 @@
                 <div class="collapse navbar-collapse" id="myNavbar">
                   <ul class="nav navbar-nav">
                     <li><a href="#" type="button">Abroad Connect</a></li>
+                    <li><a href="/opportunities" type="button">Home</a></li>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
                     <li><a href="#"><span class="glyphicon"></span></a></li>
                     <% if(!currentUser){ %>
-                    <li><a href="/register">Sign Up</span></a></li>
+                  <li><a href="/register">Sign Up</span></a></li>
+
                     <li><a href="/login" >Log In</span></a></li>
-                   <%  }else { %>
+                    <% } else { %>
                     <li><a href="/logout">Log Out</span></a></li>
                     <li><a href="#">Signed in as, <%= currentUser.username %></a></li>
                   <%  } %>
@@ -53,5 +55,3 @@
               </div>
               <% } %>
             </div>
-
-  

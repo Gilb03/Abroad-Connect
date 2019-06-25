@@ -3,6 +3,7 @@ var router  = express.Router();
 var Opportunity = require('../models/opportunity');
 var middlewareObj = require('../middleware');
 
+
 // INDEX Route - Show all opportunities
 router.get('/', function(req, res){
     // get all opportunities from the DB
@@ -15,35 +16,36 @@ router.get('/', function(req, res){
     });
 });
 // CREATE ROUTE - Add new opportunity to dB
-router.post('/', middlewareObj.isLoggedIn, function(req, res){
-    //get data from form and add to array
-    var name= req.body.name;
-    var image= req.body.image;
-    var link= req.body.link;
-    var description= req.body.description;
-    var author = { 
-        id: req.user._id,
-        username: req.user.username
-    }
-    var newOpportunity= {name: name, image: image, link: link, description: description, author: author}
-    // create new opportunity and save to database
-    Opportunity.create(newOpportunity, function(err, newlyCreated){
+router.post("/", middlewareObj.isLoggedIn, function (req, res){
+    var name = req.body.name,
+        author = {
+            id: req.user._id,
+            username: req.user.username
+        }
+      image = req.body.image,
+      description = req.body.description,
+      link = req.body.link,
+      price = req.body.price,
+      newOpportunity = {  name: name,  image: image,  description: description,  link: link, author: author, price: price}
+  //  create a new opportunity and save to dB
+      Opportunity.create(newOpportunity, function(err, newlyCreated){
         if(err){
             console.log(err);
         } else {
-            //redirect back to opportunity page
+            //redirect back to opportunities page
             console.log(newlyCreated);
-            res.redirect('/opportunities');
+            res.redirect("/opportunities");
         }
-
-    });
+      });
 });
+
+
 //NEW ROUTE - Show form to create new opportunity
 router.get('/new', middlewareObj.isLoggedIn, function(req, res){
     res.render('opportunities/new');
 });
 
-//SHOW ROUTE 
+//SHOW ROUTE
 router.get('/:id', function(req, res){
     // find opportunity with provided ID
     Opportunity.findById(req.params.id).populate('comments').exec( function(err, foundOpportunity){
@@ -52,16 +54,16 @@ router.get('/:id', function(req, res){
         } else{
             console.log(foundOpportunity);
               // render show template with that singular opportunity
-    res.render('opportunities/show', {opportunity: foundOpportunity}); 
+    res.render('opportunities/show', {opportunity: foundOpportunity});
         }
     });
- 
+
 });
 
 // EDIT OPPORTUNITY ROUTE
 router.get("/:id/edit", middlewareObj.checkOpportunityOwnership, function(req, res){
     Opportunity.findById(req.params.id, function(err, foundOpportunity){
-     res.render("opportunities/edit", {opportunity: foundOpportunity}); 
+     res.render("opportunities/edit", {opportunity: foundOpportunity});
    });
 });
 //UPDATE OPPORTUNITY ROUTE

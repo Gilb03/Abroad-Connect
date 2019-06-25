@@ -10,7 +10,7 @@ middlewareObj.checkOpportunityOwnership = function checkOpportunityOwnership(req
                     req.flash('error', "Opportunity could not be found");
                     res.redirect("back");
                 } else {
-                    if(foundOpportunity.author.id.equals(req.user._id)){
+                    if(foundOpportunity.author.id.equals(req.user._id) || req.user.isAdmin){
                         next();
                     } else {
                         req.flash('error', "You don't have permission to do that");
@@ -27,7 +27,7 @@ middlewareObj.checkCommentOwnership = function(req, res, next) {
             if(err){
                 res.redirect("back");
             } else {
-                if(foundComment.author.id.equals(req.user._id)){
+                if(foundComment.author.id.equals(req.user._id) || req.user.isAdmin){
                     next();
                 } else {
                     req.flash('error', "You don't have permission to do that!");

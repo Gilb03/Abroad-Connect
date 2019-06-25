@@ -1,0 +1,95 @@
+
+body {
+    background-color: #000;
+  }
+
+  #landing-header {
+    z-index: 1;
+    position: relative;
+    text-align: center;
+    padding-top: 40vh;
+  }
+
+  #adjacent-links {
+    z-index: 1;
+    position:relative;
+    text-align: center;
+    padding-top: 5vh;
+  }
+
+  #landing-header h1 {
+    color: #fff;
+  }
+
+  #landing-footer {
+    text-align:center;
+    color:white;
+  }
+
+  .slideshow {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .slideshow li {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    opacity: 0;
+    z-index: 0;
+    animation: imageAnimation 50s linear infinite;
+  }
+
+  .slideshow li:nth-child(1) {
+    background-image: url(../assets/blackmaleandfemalestudying.jpg);
+    /*animation-delay: 10s;*/
+  }
+  .slideshow li:nth-child(2) {
+    background-image: url(../assets/bigstock-group-of-happy-college-students.jpg);
+    animation-delay: 20s; /*Black colege students studying*/
+  }
+  .slideshow li:nth-child(3) {
+    background-image: url(../assets/Three-black-women-holding-books.jpg);
+    animation-delay: 30s;/* Three black women holding books*/
+  }
+  .slideshow li:nth-child(4) {
+    background-image: url(../assets/mixed-students.jpg);
+    animation-delay: 40s; /* mixed students*/
+  }
+  .slideshow li:nth-child(5) {
+    background-image: url(../assets/black-students-on-steps11.jpg);
+    animation-delay: 50s;
+  }
+
+  @keyframes imageAnimation {
+    0% {
+      opacity: 0;
+      animation-timing-function: ease-in;
+    }
+    10% {
+      opacity: 1;
+      animation-timing-function: ease-out;
+    }
+    20% {
+      opacity: 1
+    }
+    30% {
+      opacity: 0
+    }
+  }
+
+  .no-cssanimations .slideshow li {
+      opacity: 1;
+  }
