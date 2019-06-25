@@ -53,23 +53,24 @@ body {
   }
 
   .slideshow li:nth-child(1) {
-    background-image: url(http://i.imgur.com/K3mPv14.jpg);
+    background-image: url(../assets/blackmaleandfemalestudying.jpg);
+    /*animation-delay: 10s;*/
   }
   .slideshow li:nth-child(2) {
-    background-image: url(https://res.cloudinary.com/https-gilb03-github-io/image/upload/v1556820092/sample.jpg);/* this the one to replace https://res.cloudinary.com/https-gilb03-github-io/image/upload/v1556820092/sample.jpg*/
-    animation-delay: 10s; /*http://i.imgur.com/SBEmFpv.jpg*/
+    background-image: url(../assets/bigstock-group-of-happy-college-students.jpg);
+    animation-delay: 20s; /*Black colege students studying*/
   }
   .slideshow li:nth-child(3) {
-    background-image: url(https://imgur.com/gallery/ZmYWlAv); /*https://imgur.com/gallery/ZmYWlAv*/
-    animation-delay: 20s;/*http://i.imgur.com/emvhOnb.jpg*/
+    background-image: url(../assets/Three-black-women-holding-books.jpg);
+    animation-delay: 30s;/* Three black women holding books*/
   }
   .slideshow li:nth-child(4) {
-    background-image: url(http://i.imgur.com/2LSMCmJ.jpg);
-    animation-delay: 30s;
+    background-image: url(../assets/mixed-students.jpg);
+    animation-delay: 40s; /* mixed students*/
   }
   .slideshow li:nth-child(5) {
-    background-image: url(http://i.imgur.com/TVGe0Ef.jpg);
-    animation-delay: 40s;
+    background-image: url(../assets/black-students-on-steps11.jpg);
+    animation-delay: 50s;
   }
 
   @keyframes imageAnimation {

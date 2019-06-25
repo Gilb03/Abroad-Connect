@@ -2,31 +2,8 @@ var express = require('express');
 var router  = express.Router();
 var Opportunity = require('../models/opportunity');
 var middlewareObj = require('../middleware');
-/* var request = require('request');
-var multer = require('multer');
-var upload = multer({ storage: storage, fileFilter: imageFilter})
-var storage = multer.diskStorage({
-  filename: function(req, file, callback) {
-    callback(null, Date.now() + file.originalname);
-  }
-});
-var imageFilter = function (req, file, cb) {
-    // accept image files only
-    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
-        return cb(new Error('Only image files are allowed!'), false);
-    }
-    cb(null, true);
-};
-//var upload = multer({ storage: storage, fileFilter: imageFilter})
 
-var cloudinary = require('cloudinary');
-cloudinary.config({
-  cloud_name: 'https-gilb03-github-io',
-  api_key: 599231579757168,
-  api_secret: process.env.CLOUDINARY_API_SECRET
-});
-*/
-//process.env.CLOUDINARY_API_SECRET
+
 // INDEX Route - Show all opportunities
 router.get('/', function(req, res){
     // get all opportunities from the DB
@@ -48,7 +25,8 @@ router.post("/", middlewareObj.isLoggedIn, function (req, res){
       image = req.body.image,
       description = req.body.description,
       link = req.body.link,
-      newOpportunity = {  name: name,  image: image,  description: description,  link: link, author: author }
+      price = req.body.price,
+      newOpportunity = {  name: name,  image: image,  description: description,  link: link, author: author, price: price}
   //  create a new opportunity and save to dB
       Opportunity.create(newOpportunity, function(err, newlyCreated){
         if(err){

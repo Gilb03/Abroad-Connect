@@ -32,9 +32,10 @@
                   <ul class="nav navbar-nav navbar-right">
                     <li><a href="#"><span class="glyphicon"></span></a></li>
                     <% if(!currentUser){ %>
-                    <li><a href="/register">Sign Up</span></a></li>
+                  <li><a href="/register">Sign Up</span></a></li>
+
                     <li><a href="/login" >Log In</span></a></li>
-                   <%  }else { %>
+                    <% } else { %>
                     <li><a href="/logout">Log Out</span></a></li>
                     <li><a href="#">Signed in as, <%= currentUser.username %></a></li>
                   <%  } %>

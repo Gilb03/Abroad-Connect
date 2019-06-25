@@ -19,15 +19,19 @@ var commentRoutes = require('./routes/comments');
 var opportunityRoutes = require('./routes/opportunities');
 var authRoutes = require('./routes/auth');
 
+var databaseUri = process.env.MONGODB_URI;
 
-mongoose.connect('mongodb://localhost:27017/abroad_connect');
+mongoose.connect(databaseUri, {useNewUrlParser: true })
+      .then(() => console.log(`Database connected`))
+      .catch(err => console.log(`Database connection error: ${err.message}`));
+
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride('_method'));
 app.use(flash());
-//seedDB();
+seedDB();
 
 //Passport Config
 app.use(require('express-session')({
