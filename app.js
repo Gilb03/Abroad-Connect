@@ -11,7 +11,7 @@ var User = require('./models/user');
 var Opportunity = require('./models/opportunity');
 var methodOverride = require('method-override');
 var Comment = require('./models/comment');
-var seedDB = require('./seeds');
+//var seedDB = require('./seeds');
 
 
 
@@ -31,7 +31,7 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride('_method'));
 app.use(flash());
-seedDB();
+//seedDB();
 
 //Passport Config
 app.use(require('express-session')({
