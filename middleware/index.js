@@ -1,4 +1,5 @@
 // all the middleware gores here
+// find out how to prevent people from navigating pages while not logged in
 var middlewareObj = {};
 var Opportunity = require('../models/opportunity');
 var Comment = require('../models/comment');
