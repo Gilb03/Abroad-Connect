@@ -19,11 +19,12 @@ var commentRoutes = require('./routes/comments');
 var opportunityRoutes = require('./routes/opportunities');
 var authRoutes = require('./routes/auth');
 
-var databaseUri = process.env.MONGODB_URI;
+const databaseUri = process.env.MONGODB_URI;
 
-mongoose.connect(databaseUri, {useNewUrlParser: true })
-      .then(() => console.log(`Database connected`))
-      .catch(err => console.log(`Database connection error: ${err.message}`));
+mongoose.connect(databaseUri, { useNewUrlParser: true, 
+useCreateIndex: true
+}).then(() => console.log(`Database connected`))
+.catch(err => console.log(`Database connection error: ${err.message}`));
 
 
 app.use(bodyParser.urlencoded({extended: true}));
