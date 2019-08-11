@@ -13,3 +13,11 @@
 .delete-form {
     display: inline;
 }
+
+.ml-auto .dropdown-menu {
+    left: auto !important;
+    right: 0px;
+}
+.h1 {
+    text-align: center;
+}
