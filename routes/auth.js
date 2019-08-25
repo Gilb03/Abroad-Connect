@@ -2,12 +2,12 @@
 var express = require('express');
 var router  = express.Router();
 var passport = require('passport');
-var Opportunity = require('user');
+var Opportunity = require('../models/opportunity');
 var User     = require('../models/user');
 var async = require('async');
-var crypto = require('crypto');
+var bcrypt = require('bcrypt');
 var nodemailer = require('nodemailer');
-var bcrypt = require('bcrypt-nodejs');
+// var bcrypt = require('bcrypt-nodejs');
 
 // ROOT route
 router.get('/', function(req, res){
@@ -67,7 +67,7 @@ router.get('/forgot', function(req, res){
 router.post('/forgot', function(req, res, next) {
     async.waterfall([
       function(done) {
-        crypto.randomBytes(20, function(err, buf) {
+        bcrypt.randomBytes(20, function(err, buf) {
           var token = buf.toString('hex');
           done(err, token);
         });
