@@ -6,8 +6,9 @@ var Opportunity = require('../models/opportunity');
 var User     = require('../models/user');
 var async = require('async');
 var bcrypt = require('bcrypt');
+const saltRounds = 10;
 var nodemailer = require('nodemailer');
-// var bcrypt = require('bcrypt-nodejs');
+var crypto = require('crypto');
 
 // ROOT route
 router.get('/', function(req, res){
@@ -47,6 +48,11 @@ router.post('/login', passport.authenticate ('local',
 }), function(req, res){
 
 });
+//about router
+router.get('/about', function(req, res){
+  res.render('about');
+});
+
 // logout route
 router.get('/logout', function(req, res){
     req.logout();
@@ -54,22 +60,19 @@ router.get('/logout', function(req, res){
     res.redirect('/opportunities');
 });
 
-//about router
-router.get('/about', function(req, res){
-  res.render('about');
-});
-
-// forgot rout
+// forgot route
 router.get('/forgot', function(req, res){
     res.render('forgot');
 });
-
+// hint : check that crypto code match works
 router.post('/forgot', function(req, res, next) {
     async.waterfall([
       function(done) {
-        bcrypt.randomBytes(20, function(err, buf) {
+        crypto.randomBytes(20, (err, buf)=> {
           var token = buf.toString('hex');
           done(err, token);
+          if (err) throw err;
+          console.log(`${buf.length} bytes of random data: ${buf.toString('hex')}`);
         });
       },
       function(token, done) {
@@ -125,7 +128,7 @@ router.post('/forgot', function(req, res, next) {
       res.render('reset', {token: req.params.token});
     });
   });
-  
+  //hint: "Cannot POST /reset"
   router.post('/reset/:token', function(req, res) {
     async.waterfall([
       function(done) {
@@ -161,7 +164,7 @@ router.post('/forgot', function(req, res, next) {
         });
         var mailOptions = {
           to: user.email,
-          from: 'learntocodeinfo@mail.com',
+          from: 'gilbertking91@gmail.com',
           subject: 'Your password has been changed',
           text: 'Hello,\n\n' +
             'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
@@ -172,7 +175,7 @@ router.post('/forgot', function(req, res, next) {
         });
       }
     ], function(err) {
-      res.redirect('/campgrounds');
+      res.redirect('/opportunities');
     });
   });
   
