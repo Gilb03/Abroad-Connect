@@ -5,10 +5,10 @@ var passport = require('passport');
 var Opportunity = require('../models/opportunity');
 var User     = require('../models/user');
 var async = require('async');
-var bcrypt = require('bcrypt');
-const saltRounds = 10;
+// var bcrypt = require('bcrypt');
+// const saltRounds = 10;
 var nodemailer = require('nodemailer');
-var crypto = require('crypto');
+// var crypto = require('crypto');
 
 // ROOT route
 router.get('/', function(req, res){
@@ -59,11 +59,12 @@ router.get('/logout', function(req, res){
     req.flash('success', "Logged you out!");
     res.redirect('/opportunities');
 });
-
+/*
 // forgot route
 router.get('/forgot', function(req, res){
     res.render('forgot');
 });
+
 // hint : check that crypto code match works
 router.post('/forgot', function(req, res, next) {
     async.waterfall([
@@ -178,7 +179,7 @@ router.post('/forgot', function(req, res, next) {
       res.redirect('/opportunities');
     });
   });
-  
+  */ 
   // USER PROFILE
   router.get("/users/:id", function(req, res) {
     User.findById(req.params.id, function(err, foundUser) {

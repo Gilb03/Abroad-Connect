@@ -1,7 +1,8 @@
 <% include ../partials/header %>
-    <div class="row">
+    <div class="row" style="text-align:center">
+        <div class="col-md-12">
         <h1 style="text-align: center">Create a New Opportunity</h1>
-        <div style="width: 30%; margin: 25px auto;">
+        <div style="width: 30%; margin: 15px auto;">
             <form action="/opportunities" method="POST">
                 <div class="form-group">
                     <input class="form-control" type="text" name="name" placeholder="name">
@@ -24,5 +25,6 @@
             </form>
             <a href="/opportunities">Go Back</a>
         </div>
+    </div>  
     </div>
 <% include ../partials/footer %>

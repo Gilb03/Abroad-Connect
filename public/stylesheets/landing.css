@@ -74,7 +74,7 @@ body {
     animation-delay: 30s;/* Three black women holding books*/
   }
   .slideshow li:nth-child(4) {
-    background-image: url(../assets/mixed-students.jpg);
+    background-image: url(../assets/three-blk-students.jpg);
     animation-delay: 40s; /* mixed students*/
   }
   .slideshow li:nth-child(5) {
