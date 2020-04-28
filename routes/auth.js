@@ -4,10 +4,10 @@ var router  = express.Router();
 var passport = require('passport');
 var Opportunity = require('../models/opportunity');
 var User     = require('../models/user');
-var async = require('async');
+// var async = require('async');
 // var bcrypt = require('bcrypt');
 // const saltRounds = 10;
-var nodemailer = require('nodemailer');
+// var nodemailer = require('nodemailer');
 // var crypto = require('crypto');
 
 // ROOT route

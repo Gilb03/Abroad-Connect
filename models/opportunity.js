@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+var  mongoose = require('mongoose');
 
 var opportunitySchema = new mongoose.Schema({
     name: String,
@@ -20,4 +20,4 @@ var opportunitySchema = new mongoose.Schema({
         }
     ]
 });
-module.exports = mongoose.model('Opportunity', opportunitySchema);
+module.exports  = mongoose.model('Opportunity', opportunitySchema);
