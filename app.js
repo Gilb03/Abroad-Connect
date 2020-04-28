@@ -1,23 +1,23 @@
 require('dotenv').config()
 
-const  express = require('express');
-var  app = express();
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-var flash  = require('connect-flash');
-var passport = require('passport');
-var LocalStrategy = require('passport-local');
-var User = require('./models/user');
-var Opportunity = require('./models/opportunity');
-var methodOverride = require('method-override');
-var Comment = require('./models/comment');
-//var seedDB = require('./seeds');
+const   express = require('express'),
+        app = express(),
+        bodyParser = require('body-parser'),
+        mongoose = require('mongoose'),
+        flash  = require('connect-flash'),
+        passport = require('passport'),
+        LocalStrategy = require('passport-local'),
+        User = require('./models/user'),
+        Opportunity = require('./models/opportunity'),
+        methodOverride = require('method-override'),
+        Comment = require('./models/comment');
 
 
 
-var commentRoutes = require('./routes/comments');
-var opportunityRoutes = require('./routes/opportunities');
-var authRoutes = require('./routes/auth');
+
+const commentRoutes = require('./routes/comments');
+const opportunityRoutes = require('./routes/opportunities');
+const authRoutes = require('./routes/auth');
 
 const databaseUri = process.env.MONGODB_URI;
 
@@ -58,7 +58,7 @@ app.use('/opportunities', opportunityRoutes);
 app.use('/opportunities/:id/comments',commentRoutes);
 app.use('/',authRoutes);
 
-const port = process.env.PORT || 3000
+let port = process.env.PORT || 3000
 app.listen(port, process.env.IP, function() {
 console.log('server is listening on port: ' + port)
 module.exports = app

@@ -11,7 +11,7 @@ router.get('/', function(req, res){
         if(err){
             console.log(err);
         } else {
-            res.render('opportunities/index',{opportunities: allOpportunities, currentUser: req.user});
+            return('opportunities/index',{opportunities: allOpportunities, currentUser: req.user});
         }
     });
 });
@@ -42,7 +42,7 @@ router.post("/", middlewareObj.isLoggedIn, function (req, res){
 
 //NEW ROUTE - Show form to create new opportunity
 router.get('/new', middlewareObj.isLoggedIn, function(req, res){
-    res.render('opportunities/new');
+    return('opportunities/new');
 });
 
 //SHOW ROUTE
@@ -54,7 +54,7 @@ router.get('/:id', function(req, res){
         } else{
             console.log(foundOpportunity);
               // render show template with that singular opportunity
-    res.render('opportunities/show', {opportunity: foundOpportunity});
+    return('opportunities/show', {opportunity: foundOpportunity});
         }
     });
 

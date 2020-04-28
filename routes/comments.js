@@ -1,6 +1,6 @@
-var express = require('express');
-var Opportunity = require('../models/opportunity');
-var Comment = require('../models/comment');
+const express = require('express'),
+      Opportunity = require('../models/opportunity'),
+      Comment = require('../models/comment');
 var router  = express.Router({mergeParams: true});
 var middlewareObj = require('../middleware');
 
